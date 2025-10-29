@@ -1,0 +1,1080 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solar Tech Gen | Premium Solar Energy Solutions</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0066cc;
+      --primary-dark: #0052a3;
+      --secondary: #ffcc00;
+      --accent: #00cc99;
+      --dark: #1a1a1a;
+      --light: #f8f9fa;
+      --gray: #6c757d;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+      line-height: 1.6;
+      color: #333;
+      overflow-x: hidden;
+    }
+    
+    /* Enhanced Navbar */
+    .navbar {
+      background: rgba(105, 123, 197, 0.95) !important;
+      backdrop-filter: blur(10px);
+      
+      transition: all 0.4  s ease;
+      box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar.scrolled {
+      padding: 10px 0;
+      background: rgba(51, 116, 181, 0.98) !important;
+    }
+    
+    .navbar-brand {
+      font-weight: 800;
+      font-size: 1.8rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo {
+      height: 70px;
+      width: auto;
+      margin-right: 15px;
+      transition: transform 0.4s ease;
+    }
+    
+    .navbar-brand:hover .logo {
+      transform: rotate(10deg);
+      color: white;
+    }
+    
+    .nav-link {
+      font-weight: 500;
+      margin: 0 8px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--secondary);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover:after {
+      width: 100%;
+    }
+    
+    .nav-link:hover {
+      color: var(--secondary) !important;
+    }
+    
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(135deg, rgba(0, 102, 204, 0.85) 0%, rgba(0, 204, 153, 0.8) 100%), 
+                  url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80') center/cover no-repeat;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-section:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 150px;
+      background: linear-gradient(transparent, var(--light));
+      z-index: 1;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+    
+    .floating-elements {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .floating-element {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: float 15s infinite linear;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+      100% { transform: translateY(0) rotate(360deg); }
+    }
+    
+    /* Buttons */
+    .btn-primary {
+      background: var(--primary);
+      border: none;
+      border-radius: 50px;
+      padding: 14px 35px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 102, 204, 0.3);
+    }
+    
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 102, 204, 0.4);
+    }
+    
+    .btn-warning {
+      background: var(--secondary);
+      border: none;
+      border-radius: 50px;
+      padding: 14px 35px;
+      font-weight: 600;
+      color: var(--dark);
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3);
+    }
+    
+    .btn-warning:hover {
+      background: #e6b800;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 204, 0, 0.4);
+      color: var(--dark);
+    }
+    
+    .btn-outline-light {
+      border-radius: 50px;
+      padding: 14px 35px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-outline-light:hover {
+      transform: translateY(-3px);
+    }
+    
+    /* Section Titles */
+    .section-title {
+      position: relative;
+      margin-bottom: 3rem;
+      font-weight: 800;
+      text-align: center;
+      font-size: 2.5rem;
+    }
+    
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      border-radius: 2px;
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      color: var(--gray);
+      margin-bottom: 4rem;
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* Service Cards */
+    .service-card {
+      transition: all 0.4s ease;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      background: white;
+    }
+    
+    .service-card:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+    }
+    
+    .service-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .service-icon {
+      font-size: 3.5rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .service-card:hover .service-icon {
+      transform: scale(1.1);
+      color: var(--accent);
+    }
+    
+    /* Features Section */
+    .features-section {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .features-section:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 300px;
+      height: 300px;
+      background: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
+      opacity: 0.59;
+      border-radius: 50%;
+      transform: translate(30%, -30%);
+    }
+    
+    .feature-item {
+      display: flex;
+      margin-bottom: 2.5rem;
+      align-items: flex-start;
+    }
+    
+    .feature-icon {
+      font-size: 2.8rem;
+      color: var(--secondary);
+      margin-right: 1.5rem;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+    
+    .feature-item:hover .feature-icon {
+      transform: rotate(10deg) scale(1.1);
+    }
+    
+    .feature-content h5 {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Stats Section */
+    .stats-section {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .stats-section:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80') center/cover no-repeat;
+      opacity: 0.59;
+    }
+    
+    .stat-item {
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(to right, white, var(--secondary));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    /* About Section */
+    .about-section {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .about-image {
+      border-radius: 15px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      transition: transform 0.5s ease;
+    }
+    
+    .about-image:hover {
+      transform: scale(1.02);
+    }
+    
+    .about-content {
+      padding-left: 30px;
+    }
+    
+    /* Consultation Banner */
+    .consultation-banner {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: white;
+      padding: 40px 0;
+      text-align: center;
+      margin: 40px 0;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);
+    }
+    
+    .consultation-banner h3 {
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    
+    .consultation-banner p {
+      font-size: 1.2rem;
+      margin-bottom: 0;
+      opacity: 0.9;
+    }
+    
+    /* Quote Section */
+    .quote-section {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .quote-form {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .form-control, .form-select {
+      border-radius: 10px;
+      padding: 15px 20px;
+      border: 1px solid #e0e0e0;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+    
+    .form-control:focus, .form-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.2rem rgba(0, 102, 204, 0.15);
+    }
+    
+    /* Contact Section */
+    .contact-section {
+      position: relative;
+    }
+    
+    .contact-info {
+      text-align: center;
+      padding: 30px 20px;
+      border-radius: 15px;
+      background: white;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease;
+      height: 100%;
+    }
+    
+    .contact-info:hover {
+      transform: translateY(-10px);
+    }
+    
+    .contact-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 60px 0 20px;
+    }
+    
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+    
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    
+    .social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      margin: 0 8px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    
+    .social-icon:hover {
+      background: var(--primary);
+      transform: translateY(-5px);
+    }
+    
+    .footer-links h5 {
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    
+    .footer-links h5:after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--secondary);
+    }
+    
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+    
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--secondary);
+      padding-left: 5px;
+    }
+    
+    .copyright {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 20px;
+      margin-top: 40px;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fade-in-up {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .about-content {
+        padding-left: 0;
+        margin-top: 30px;
+      }
+      
+      .navbar-brand {
+        font-size: 1.5rem;
+      }
+      
+      .logo {
+        height: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-white fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#home">
+      <img src="{% static 'images/SolartechGen-logo.png' %}" alt="Solar Tech Gen" class="logo" height="600">
+      
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#quote">Get Quote</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="hero-section">
+  <div class="floating-elements">
+    <div class="floating-element" style="width: 80px; height: 80px; top: 10%; left: 5%;"></div>
+    <div class="floating-element" style="width: 120px; height: 120px; top: 20%; right: 10%;"></div>
+    <div class="floating-element" style="width: 60px; height: 60px; bottom: 20%; left: 15%;"></div>
+    <div class="floating-element" style="width: 100px; height: 100px; bottom: 10%; right: 5%;"></div>
+  </div>
+  
+  <div class="container hero-content">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <h1 class="hero-title fade-in-up">Power Your Future With <span style="color: var(--secondary)">Clean Energy</span></h1>
+        <p class="hero-subtitle fade-in-up">Premium solar solutions for homes and businesses. Save up to 90% on electricity bills with our cutting-edge solar technology.</p>
+        <div class="d-flex flex-wrap gap-3 fade-in-up">
+          <a href="#quote" class="btn btn-warning btn-lg">Get Your Free Quote</a>
+          <a href="#services" class="btn btn-outline-light btn-lg">Explore Services</a>
+        </div>
+      </div>
+      <div class="col-lg-4 d-none d-lg-block">
+        <div class="text-center">
+          <div style="background: rgba(255,255,255,0.1); border-radius: 20px; padding: 30px; backdrop-filter: blur(10px);">
+            <h4 class="mb-3">Calculate Your Savings</h4>
+            <p>See how much you can save with solar energy</p>
+            <a href="#quote" class="btn btn-light">Calculate Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="section-title">Our Premium Services</h2>
+    <p class="section-subtitle">Comprehensive solar solutions tailored to your specific energy needs and budget</p>
+    
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card service-card text-center p-4">
+          <div class="service-icon">
+            <i class="fas fa-solar-panel"></i>
+          </div>
+          <h4>Residential Solar Systems</h4>
+          <p>Complete rooftop solar solutions for homes with premium panels, inverters, and battery storage options.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card service-card text-center p-4">
+          <div class="service-icon">
+            <i class="fas fa-industry"></i>
+          </div>
+          <h4>Commercial Solar Solutions</h4>
+          <p>Large-scale solar installations for businesses, factories, and commercial complexes with maximum ROI.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card service-card text-center p-4">
+          <div class="service-icon">
+            <i class="fas fa-tools"></i>
+          </div>
+          <h4>Maintenance & Monitoring</h4>
+          <p>24/7 monitoring, preventive maintenance, and rapid response services to ensure optimal system performance.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row mt-4 g-4">
+      <div class="col-md-4">
+        <div class="card service-card text-center p-4">
+          <div class="service-icon">
+            <i class="fas fa-battery-full"></i>
+          </div>
+          <h4>Battery Storage Solutions</h4>
+          <p>Advanced battery systems for energy storage, backup power, and maximizing self-consumption of solar energy.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card service-card text-center p-4">
+          <div class="service-icon">
+            <i class="fas fa-tint"></i>
+          </div>
+          <h4>Solar Water Heating</h4>
+          <p>Efficient solar thermal systems for water heating, reducing your water heating costs by up to 80%.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card service-card text-center p-4">
+          <div class="service-icon">
+            <i class="fas fa-charging-station"></i>
+          </div>
+          <h4>EV Charging Stations</h4>
+          <p>Solar-powered electric vehicle charging stations for homes and businesses, combining clean energy with clean transportation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section py-5">
+  <div class="container">
+    <h2 class="section-title">Why Choose Solar Tech Gen?</h2>
+    <p class="section-subtitle">We deliver exceptional value through innovation, quality, and customer-centric approach</p>
+    
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="feature-item">
+          <div class="feature-icon">
+            <i class="fas fa-award"></i>
+          </div>
+          <div class="feature-content">
+            <h5>Certified Excellence</h5>
+            <p>Our team consists of NABCEP certified professionals with extensive experience in solar design and installation.</p>
+          </div>
+        </div>
+        
+        <div class="feature-item">
+          <div class="feature-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div class="feature-content">
+            <h5>Premium Quality Assurance</h5>
+            <p>We use only Tier-1 solar panels and components with industry-leading 25-year performance warranties.</p>
+          </div>
+        </div>
+        
+        <div class="feature-item">
+          <div class="feature-icon">
+            <i class="fas fa-hand-holding-usd"></i>
+          </div>
+          <div class="feature-content">
+            <h5>Maximum ROI</h5>
+            <p>Our systems are designed to deliver the fastest payback period and highest return on investment in the industry.</p>
+          </div>
+        </div>
+        
+        <div class="feature-item">
+          <div class="feature-icon">
+            <i class="fas fa-headset"></i>
+          </div>
+          <div class="feature-content">
+            <h5>Lifetime Support</h5>
+            <p>We provide comprehensive after-sales support, monitoring, and maintenance services throughout your system's lifetime.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6">
+        <img src="{% static 'images/technician-3936982_960_720.jpg' %}" alt="Why Choose Us" class="img-fluid rounded shadow">
+  </div>
+</section>
+
+<!-- Consultation Banner -->
+<div class="container">
+  <div class="consultation-banner">
+    <h3>Free Solar Consultation & Site Assessment</h3>
+    <p>Our experts will visit your property, analyze your energy needs, and provide a customized solar solution with detailed savings projections - completely free of charge!</p>
+  </div>
+</div>
+
+<!-- Stats Section -->
+<section class="stats-section py-5 text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-6 mb-4">
+        <div class="stat-item">
+          <div class="stat-number" data-count="750">0</div>
+          <p>Projects Completed</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6 mb-4">
+        <div class="stat-item">
+          <div class="stat-number" data-count="18">0</div>
+          <p>Years of Experience</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6 mb-4">
+        <div class="stat-item">
+          <div class="stat-number" data-count="98">0</div>
+          <p>Customer Satisfaction</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-6 mb-4">
+        <div class="stat-item">
+          <div class="stat-number" data-count="24">0</div>
+          <p>Support Available</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="about-section py-5 bg-white">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80" alt="About Solar Tech Gen" class="img-fluid rounded shadow about-image">
+      </div>
+      <div class="col-lg-6 about-content">
+        <h2 class="section-title text-start">About Solar Tech Gen</h2>
+        <p class="mb-4">Solar Tech Gen is at the forefront of India's clean energy revolution. With over 18 years of experience, we've established ourselves as a trusted partner for residential, commercial, and industrial solar solutions.</p>
+        
+        <p class="mb-4">Our mission is to make solar energy accessible, affordable, and reliable for everyone. We combine cutting-edge technology with exceptional customer service to deliver solar solutions that not only reduce your carbon footprint but also provide substantial financial benefits.</p>
+        
+        <p class="mb-4">We believe in a sustainable future powered by clean energy, and we're committed to helping our customers transition to solar with confidence and peace of mind.</p>
+        
+        <div class="d-flex flex-wrap gap-3">
+          <a href="#contact" class="btn btn-primary">Contact Us</a>
+          <a href="#quote" class="btn btn-outline-primary">Get Free Quote</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quote Section -->
+<section id="quote" class="quote-section py-5">
+  <div class="container">
+    <h2 class="section-title">Request Your Custom Solar Quote</h2>
+    <p class="section-subtitle">Fill out the form below and our solar experts will contact you with a personalized solution</p>
+    
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <form id="quoteForm" method="POST" class="quote-form">
+          {% csrf_token %}
+          <div class="row g-4">
+            <div class="col-md-6">
+              <input class="form-control" name="name" placeholder="Full Name" required>
+            </div>
+            <div class="col-md-6">
+              <input class="form-control" type="email" name="email" placeholder="Email Address" required>
+            </div>
+            <div class="col-md-6">
+              <input class="form-control" name="phone" placeholder="Phone Number" required>
+            </div>
+            <div class="col-md-6">
+              <input class="form-control" name="address" placeholder="Property Address" required>
+            </div>
+            <div class="col-md-6">
+              <input class="form-control" name="average_bill" placeholder="Average Monthly Electricity Bill (₹)" required>
+            </div>
+            <div class="col-md-6">
+              <select class="form-select" id="service" name="service" required>
+                <option value="">Select a Service</option>
+                <option value="installation">Solar Panel Installation</option>
+                <option value="cleaning">Panel Cleaning</option>
+                <option value="battery">Battery Repair/Replacement</option>
+                <option value="pump">Solar Pump Controllers</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <textarea class="form-control" name="info" placeholder="Additional Information (roof type, energy needs, etc.)" rows="4"></textarea>
+            </div>
+          </div>
+          <div class="text-center mt-4">
+            <button class="btn btn-primary btn-lg" type="submit">Get Your Free Quote</button>
+          </div>
+          <p id="statusMsg" class="text-center mt-3"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact-section py-5 bg-white">
+  <div class="container">
+    <h2 class="section-title">Contact Us</h2>
+    <p class="section-subtitle">Get in touch with our solar energy experts for any questions or consultation</p>
+    
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="contact-info">
+          <div class="contact-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <h5>Our Location</h5>
+          <p>PLT NO. 179 D-5 CHHATTARPUR PAHADI, NEW DELHI - 110074</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="contact-info">
+          <div class="contact-icon">
+            <i class="fas fa-phone"></i>
+          </div>
+          <h5>Phone Numbers</h5>
+          <p>+91-9811068286<br>+91-9319616720</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="contact-info">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <h5>Email Address</h5>
+          <p><a href="mailto:solartechgen@gmail.com">solartechgen@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="text-center mt-4">
+      <div class="social-icons">
+        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-4">
+        <div class="footer-logo">
+          <img src="{% static 'images/SolartechGen-logo.png' %}" alt="Solar Tech Gen" height="70" class="me-2">
+          Solar Tech Gen
+        </div>
+        <p>Leading the transition to clean, affordable solar energy with innovative solutions and exceptional customer service.</p>
+        <div class="social-icons">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      
+      <div class="col-lg-2 col-md-6 mb-4">
+        <div class="footer-links">
+          <h5>Quick Links</h5>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#quote">Get Quote</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="footer-links">
+          <h5>Our Services</h5>
+          <ul>
+            <li><a href="#services">Residential Solar</a></li>
+            <li><a href="#services">Commercial Solar</a></li>
+            <li><a href="#services">Maintenance</a></li>
+            <li><a href="#services">Battery Storage</a></li>
+            <li><a href="#services">Solar Water Heating</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="footer-links">
+          <h5>Contact Info</h5>
+          <ul>
+            <li><i class="fas fa-map-marker-alt me-2"></i> PLT NO. 179 D-5 CHHATTARPUR PAHADI, NEW DELHI - 110074</li>
+            <li><i class="fas fa-phone me-2"></i> +91-9811068286</li>
+            <li><i class="fas fa-phone me-2"></i> +91-9319616720</li>
+            <li><i class="fas fa-envelope me-2"></i> solartechgen@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      <p>&copy; 2023 Solar Tech Gen. All Rights Reserved. | Designed with <i class="fas fa-heart text-danger"></i> for a Sustainable Future</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// Navbar scroll effect
+window.addEventListener('scroll', function() {
+  const navbar = document.querySelector('.navbar');
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+
+// Animated counter for stats
+function animateCounter() {
+  const counters = document.querySelectorAll('.stat-number');
+  const speed = 200;
+  
+  counters.forEach(counter => {
+    const target = +counter.getAttribute('data-count');
+    const count = +counter.innerText;
+    const increment = target / speed;
+    
+    if (count < target) {
+      counter.innerText = Math.ceil(count + increment);
+      setTimeout(animateCounter, 1);
+    } else {
+      counter.innerText = target;
+    }
+  });
+}
+
+// Initialize counter when stats section is in view
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter();
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+observer.observe(document.querySelector('.stats-section'));
+
+// Form submission
+document.getElementById('quoteForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const formData = new FormData(this);
+  const submitBtn = this.querySelector('button[type="submit"]');
+  const originalText = submitBtn.innerHTML;
+  
+  // Show loading state
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Sending...';
+  submitBtn.disabled = true;
+  
+  try {
+    const response = await fetch('/send_quote/', {method: 'POST', body: formData});
+    const result = await response.json();
+    const msg = document.getElementById('statusMsg');
+    
+    if (result.success) {
+      msg.textContent = '✅ Your quote request has been sent successfully! Our solar expert will contact you within 24 hours.';
+      msg.className = 'text-success text-center mt-3';
+      document.getElementById('quoteForm').reset();
+    } else {
+      msg.textContent = '❌ There was an error sending your request. Please try again or contact us directly.';
+      msg.className = 'text-danger text-center mt-3';
+    }
+  } catch (error) {
+    const msg = document.getElementById('statusMsg');
+    msg.textContent = '❌ Network error. Please check your connection and try again.';
+    msg.className = 'text-danger text-center mt-3';
+  } finally {
+    // Reset button
+    submitBtn.innerHTML = originalText;
+    submitBtn.disabled = false;
+  }
+});
+
+// Add floating elements dynamically
+function createFloatingElements() {
+  const container = document.querySelector('.floating-elements');
+  for (let i = 0; i < 8; i++) {
+    const element = document.createElement('div');
+    const size = Math.random() * 60 + 40;
+    const top = Math.random() * 80 + 10;
+    const left = Math.random() * 80 + 10;
+    const duration = Math.random() * 20 + 10;
+    
+    element.className = 'floating-element';
+    element.style.width = `${size}px`;
+    element.style.height = `${size}px`;
+    element.style.top = `${top}%`;
+    element.style.left = `${left}%`;
+    element.style.animationDuration = `${duration}s`;
+    element.style.animationDelay = `${Math.random() * 5}s`;
+    
+    container.appendChild(element);
+  }
+}
+
+// Initialize floating elements
+createFloatingElements();
+</script>
+
+</body>
+</html>
