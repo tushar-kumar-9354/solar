@@ -1,0 +1,14 @@
+# Core Framework
+Django==5.1.2
+
+# For handling environment variables (e.g., email credentials)
+python-dotenv==1.0.1
+
+# For sending emails (optional but common dependency)
+django-crispy-forms==2.2
+
+# Optional: if you plan to deploy (e.g., on Render, Railway, or Heroku)
+gunicorn==23.0.0
+
+# Optional: to serve static files easily during deployment
+whitenoise==6.7.0
