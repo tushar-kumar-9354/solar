@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-u%*5@g4tl!pl!4i=4_7zs6#**vv^pr+bb+4ohgk^yik_b!1$jk
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-ALLOWED_HOSTS = ["solar-29lr.onrender.com"]
+ALLOWED_HOSTS = ["solar-29lr.onrender.com","*"]
 CSRF_TRUSTED_ORIGINS = [
     'https://solar-29lr.onrender.com',
 ]
@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -134,10 +134,18 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # This should point to your static folder
 ]
 
+import os
+from pathlib import Path
 
+# Email Configuration with environment variables
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'solartechgen@gmail.com'
-EMAIL_HOST_PASSWORD = 'kuvr yvej mlyl egiw'
+EMAIL_HOST_PASSWORD = 'kuvryvejmlylegiw'
+DEFAULT_FROM_EMAIL = 'solartechgen@gmail.com'
+
+# For development fallback - use console backend if no email password
+if not EMAIL_HOST_PASSWORD:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
