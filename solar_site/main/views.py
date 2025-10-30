@@ -1,13 +1,9 @@
-from django.shortcuts import render
-from django.core.mail import send_mail, BadHeaderError
 from django.http import JsonResponse
-from django.conf import settings
+from django.shortcuts import render
+from .email_utils import send_email_resend
 import logging
 
 logger = logging.getLogger(__name__)
-
-def home(request):
-    return render(request, 'index.html')
 
 def send_quote(request):
     if request.method == 'POST':
@@ -21,49 +17,47 @@ def send_quote(request):
 
             subject = f"New Quote Request from {name}"
             message = f"""
-            Name: {name}
-            Email: {email}
-            Phone: {phone}
-            Address: {address}
-            Service Interested: {service}
-            Additional Information: {info}
-            
-            This is a new quote request from your website.
+🌟 NEW QUOTE REQUEST 🌟
+
+Name: {name}
+Email: {email}
+Phone: {phone}
+Address: {address}
+Service Interested: {service}
+Additional Information: {info}
+
+This request was submitted through your website.
             """
 
-            # Try to send email
-            try:
-                send_mail(
-                    subject,
-                    message,
-                    settings.DEFAULT_FROM_EMAIL,  # Use your email as sender, not user's email
-                    [settings.DEFAULT_FROM_EMAIL],  # Send to yourself
-                    fail_silently=False,
-                )
-                logger.info(f"Quote request sent successfully from {email}")
+            # Send email using Resends
+            success = send_email_resend(
+                'solartechgen@gmail.com',  # Send to yourself
+                subject,
+                message
+            )
+            
+            if success:
+                logger.info(f"Quote request sent via Resend from {email}")
                 return JsonResponse({
                     'success': True, 
-                    'message': 'Your quote request has been sent successfully! Our solar expert will contact you within 24 hours.'
+                    'message': 'Your quote request has been sent successfully! We will contact you within 24 hours.'
                 })
-                
-            except (BadHeaderError, ConnectionRefusedError, OSError) as e:
-                # Log the request to database or file instead
-                logger.warning(f"Email failed, but quote request received from {email}: {str(e)}")
-                
-                # Still return success to user, but log the request
+            else:
+                # Fallback: log to console
+                logger.info(f"Quote request (needs manual follow-up): {name} - {email} - {phone}")
                 return JsonResponse({
                     'success': True, 
-                    'message': 'Your request has been received! We will contact you shortly. (Note: Email confirmation may be delayed)'
+                    'message': 'Your request has been received! We will contact you shortly.'
                 })
                 
         except Exception as e:
-            logger.error(f"Error processing quote request: {str(e)}")
+            logger.error(f"Error processing quote: {str(e)}")
             return JsonResponse({
                 'success': False, 
-                'message': 'Failed to process your request. Please try again later or contact us directly.'
+                'message': 'Failed to process request. Please try again.'
             }, status=500)
 
-    return JsonResponse({
-        'success': False, 
-        'message': 'Invalid request method.'
-    }, status=400)
+    return JsonResponse({'success': False}, status=400)
+
+def home(request):
+    return render(request, 'index.html')
