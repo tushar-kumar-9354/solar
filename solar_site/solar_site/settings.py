@@ -138,14 +138,15 @@ import os
 from pathlib import Path
 
 # Email Configuration with environment variables
+# Gmail SMTP Configuration for Render
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+EMAIL_PORT = 465  # Use port 465 with SSL instead of 587 with TLS
+EMAIL_USE_SSL = True  # Changed from EMAIL_USE_TLS
+EMAIL_USE_TLS = False  # Explicitly disable TLS
 EMAIL_HOST_USER = 'solartechgen@gmail.com'
-EMAIL_HOST_PASSWORD = 'kuvryvejmlylegiw'
+EMAIL_HOST_PASSWORD = 'kuvryvejmlylegiw'  # Your app password
 DEFAULT_FROM_EMAIL = 'solartechgen@gmail.com'
-
 # For development fallback - use console backend if no email password
 if not EMAIL_HOST_PASSWORD:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
