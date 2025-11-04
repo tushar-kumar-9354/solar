@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-u%*5@g4tl!pl!4i=4_7zs6#**vv^pr+bb+4ohgk^yik_b!1$jk'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -118,9 +118,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -128,13 +127,24 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 import os
 from pathlib import Path
 
+
 # Add this to your settings.py
+import os
+
+# Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
+
+# Additional locations of static files
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # This should point to your static folder
+    os.path.join(BASE_DIR, 'static'),
 ]
 
-import os
+# For production - where collectstatic will put files
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Media files (user uploaded content)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 from pathlib import Path
 
 # Email Configuration with environment variables
@@ -142,7 +152,5 @@ from pathlib import Path
 import os
 
 # Resend Configuration
-RESEND_API_KEY = 're_hyHkYXmJ_L3BWko1Ua8YTfQYe7CUp52J8'
+RESEND_API_KEY = os.environ.get('RESEND_API_KEY')
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Fallback
-
-# If Resend API key is available, we'll use it in views
